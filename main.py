@@ -21,14 +21,15 @@ UPLOADS_DIR = BASE_DIR / "uploads"
 THUMBNAILS_DIR = BASE_DIR / "thumbnails"
 MAX_UPLOAD_SIZE = 500 * 1024 * 1024  # 500MB
 
+UPLOADS_DIR.mkdir(exist_ok=True)
+THUMBNAILS_DIR.mkdir(exist_ok=True)
+
 app = FastAPI(title="MemoryGraph", version="0.1.0")
 
 # Initialize DB on startup
 @app.on_event("startup")
 async def startup():
     init_db()
-    UPLOADS_DIR.mkdir(exist_ok=True)
-    THUMBNAILS_DIR.mkdir(exist_ok=True)
     logger.info("MemoryGraph ready")
 
 
